@@ -64,10 +64,28 @@
 (def workers 5)
 (def delay 60)
 
+(defn calc-end [step start-time]
+  (+ start-time delay (- (int (first (char-array step))) (int \A)) 1))
+
 (defn day07-2 [data]
   (loop [t 0
          wip {}
          graph (calc-graph data)]
+    (let [next-step (get-next graph)]
+      (if (and next-step (> workers (count wip)))
+        (recur t
+               (assoc wip next-step (calc-end next-step t))
+               (start-step graph next-step))
+        (if (empty? wip)
+          t
+          (let [[ended end-time] (apply min-key val wip)]
+            (recur end-time
+                   (dissoc wip ended)
+                   (end-step graph ended))))))))
+
+
+
+
 
 
 
