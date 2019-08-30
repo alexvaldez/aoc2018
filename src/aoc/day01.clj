@@ -9,14 +9,10 @@
   (apply + input))
 
 (defn day01-2 [input]
-  (loop [seen #{}
-         data (cycle input)
-         sum 0]
-    (let [newsum (+ sum (first data))]
-      (if (contains? seen newsum)
-        newsum
-        (recur (conj seen newsum)
-               (rest data)
-               newsum)))))
-
-
+  (reduce
+          (fn [seen x]
+            (if (seen x)
+              (reduced x)
+              (conj seen x)))
+          #{}
+          (reductions + (cycle input))))
