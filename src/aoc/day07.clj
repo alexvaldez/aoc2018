@@ -62,10 +62,10 @@
                (end-step (start-step graph next-step) next-step))))))
 
 (def workers 5)
-(def delay 60)
+(def overhead 60)
 
 (defn calc-end [step start-time]
-  (+ start-time delay (- (int (first (char-array step))) (int \A)) 1))
+  (+ start-time overhead (- (int (first (char-array step))) (int \A)) 1))
 
 (defn day07-2 [data]
   (loop [t 0
