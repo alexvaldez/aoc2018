@@ -4,12 +4,6 @@
 (defn parse [input]
   (mapv #(Integer. %) (re-seq #"\d+" (slurp input))))
 
-(defn add [arr i val]
-  (into [] (concat (subvec arr 0 i) [val] (subvec arr i))))
-
-(defn delete [arr i]
-  (into [] (concat (subvec arr 0 i) (subvec arr (inc i)))))
-
 (defn day09-1 [[nplayers nmarbles]]
   (def arr (java.util.ArrayList.))
   (.add arr 0 0)
