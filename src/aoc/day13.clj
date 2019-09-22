@@ -100,10 +100,11 @@
                   carts
                   carts)]
       (if (> (count newcarts) 1)
-        (do
-          (dump newcarts terrain)
-          (if (= "" (read-line))
-            (recur newcarts)))
+        ;(do
+        ;  (dump newcarts terrain)
+        ;  (if (= "" (read-line))
+        ;    (recur newcarts)))
+        (recur newcarts)
         (let [answer (first newcarts)]
           (and answer (str/join "," (subvec answer 0 2))))))))
 
